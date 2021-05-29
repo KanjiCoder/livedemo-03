@@ -10,9 +10,17 @@
 
         http.createServer( function(req,res){
 
-            res.writeHead(200,{"Content-Type":'text/html'});
-            res.write("Hello World");
-            res.end();
+            fs.readFile( "./README.MD" , function(err,dat){
+
+                if( err ){
+                    res.write("[failed to read file]");
+                    res.end();
+                }else{
+                    res.writeHead(200,{"Content-Type":'text/html'});
+                    res.write( dat , "utf-8" );
+                    res.end();
+                };;
+            });;
 
         }).listen(PORT);
 
